@@ -41,11 +41,9 @@ func Subscribe(results <-chan exchange.TradeData) {
 
 func Start(interval int, w Writer) {
 	t = time.NewTicker(time.Second * time.Duration(interval))
-	go func() {
-		for range t.C {
-			w.Write(s)
-		}
-	}()
+	for range t.C {
+		w.Write(s)
+	}
 }
 
 func Stop() {

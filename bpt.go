@@ -8,7 +8,6 @@ import (
 	"bpt/exchange"
 	"bpt/ticker"
 	"bpt/worker"
-	"time"
 )
 
 func main()  {
@@ -34,7 +33,4 @@ func main()  {
 
 	ticker.Subscribe(results)
 	ticker.Start(conf.App.Interval, ticker.SimpleWriter{})
-
-	//TODO: Daemonize
-	time.Sleep(time.Duration(10) * time.Minute)
 }
