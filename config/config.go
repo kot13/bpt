@@ -1,9 +1,9 @@
 package config
 
 import (
-	log "github.com/Sirupsen/logrus"
 	"flag"
 	"github.com/BurntSushi/toml"
+	log "github.com/Sirupsen/logrus"
 )
 
 var cfg Cfg
@@ -24,11 +24,11 @@ type LoggerConfig struct {
 }
 
 type FeedConfig struct {
-	Name string   `toml:"name"`
-	Pair string   `toml:"pair"`
-	Url  string   `toml:"url"`
-	Parser string `toml:"parser"`
-	Lifetime int  `toml:"lifetime"`
+	Name     string `toml:"name"`
+	Pair     string `toml:"pair"`
+	Url      string `toml:"url"`
+	Parser   string `toml:"parser"`
+	Lifetime int    `toml:"lifetime"`
 }
 
 func init() {

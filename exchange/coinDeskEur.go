@@ -10,7 +10,7 @@ type CoinDeskEur struct{}
 type CoinDeskEurResponse struct {
 	Bpi struct {
 		EUR struct {
-			RateFloat   float64 `json:"rate_float"`
+			RateFloat float64 `json:"rate_float"`
 		} `json:"EUR"`
 	} `json:"bpi"`
 }

@@ -1,9 +1,9 @@
 package worker
 
 import (
-	"time"
 	"bpt/exchange"
 	log "github.com/Sirupsen/logrus"
+	"time"
 )
 
 func New(p exchange.Point, stop chan bool, results chan<- exchange.TradeData) {

@@ -1,11 +1,11 @@
 package ticker
 
 import (
-	"time"
 	"fmt"
+	"time"
 )
 
-type SimpleWriter struct {}
+type SimpleWriter struct{}
 
 func (s SimpleWriter) Write(storage Storage) {
 	format := "%s: %6.2f    Active sources: (%d of %d);\t"

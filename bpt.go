@@ -4,13 +4,13 @@ import (
 	log "github.com/Sirupsen/logrus"
 
 	"bpt/config"
-	"bpt/logger"
 	"bpt/exchange"
+	"bpt/logger"
 	"bpt/ticker"
 	"bpt/worker"
 )
 
-func main()  {
+func main() {
 	conf := config.GetConfig()
 	logFinalizer, err := logger.InitLogger(conf.Logger.LogLevel, conf.Logger.LogFile)
 	if err != nil {

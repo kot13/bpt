@@ -1,13 +1,13 @@
 package exchange
 
 import (
-	"net/http"
-	"io/ioutil"
-	"encoding/json"
 	"crypto/tls"
+	"encoding/json"
 	"fmt"
-	"time"
+	"io/ioutil"
 	"net"
+	"net/http"
+	"time"
 )
 
 type Parser interface {
@@ -16,25 +16,25 @@ type Parser interface {
 
 type Point struct {
 	HttpClient *http.Client
-	Name      string
-	Pair	  string
-	Url       string
-	Parser    Parser
-	Lifetime  time.Duration
+	Name       string
+	Pair       string
+	Url        string
+	Parser     Parser
+	Lifetime   time.Duration
 }
 
 type TradeData struct {
 	Name      string
-	Pair	  string
+	Pair      string
 	Price     float64
 	Time      time.Time
 	ExpiredAt time.Time
 }
 
 var (
-	client *http.Client
+	client            *http.Client
 	registeredParsers = map[string]Parser{}
-	timeout = time.Duration(10 * time.Second)
+	timeout           = time.Duration(10 * time.Second)
 )
 
 func dialTimeout(network, addr string) (net.Conn, error) {
@@ -44,7 +44,7 @@ func dialTimeout(network, addr string) (net.Conn, error) {
 func init() {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		Dial: dialTimeout,
+		Dial:            dialTimeout,
 	}
 
 	client = &http.Client{Transport: tr}
@@ -63,11 +63,11 @@ func NewPoint(name string, pair string, url string, parserName string, lifetime 
 
 	p = Point{
 		HttpClient: client,
-		Name: name,
-		Pair: pair,
-		Url:  url,
-		Parser: parser,
-		Lifetime: time.Duration(lifetime),
+		Name:       name,
+		Pair:       pair,
+		Url:        url,
+		Parser:     parser,
+		Lifetime:   time.Duration(lifetime),
 	}
 
 	return

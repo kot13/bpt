@@ -1,14 +1,14 @@
 package logger
 
 import (
-	"fmt"
-	"os"
-	"github.com/Sirupsen/logrus"
 	"encoding/json"
+	"fmt"
+	"github.com/Sirupsen/logrus"
+	"os"
 )
 
-type logstashFormatter struct{
-	Type			string
+type logstashFormatter struct {
+	Type            string
 	TimestampFormat string
 }
 

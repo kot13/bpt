@@ -1,8 +1,8 @@
 package ticker
 
 import (
-	"time"
 	"bpt/exchange"
+	"time"
 )
 
 type Writer interface {
@@ -12,8 +12,8 @@ type Writer interface {
 type Storage map[string]map[string]Rate
 
 type Rate struct {
-	Value 		float64
-	ExpiredAt	time.Time
+	Value     float64
+	ExpiredAt time.Time
 }
 
 var t *time.Ticker
@@ -31,7 +31,7 @@ func Subscribe(results <-chan exchange.TradeData) {
 				}
 
 				s[result.Pair][result.Name] = Rate{
-					Value: result.Price,
+					Value:     result.Price,
 					ExpiredAt: result.ExpiredAt,
 				}
 			}
