@@ -1,7 +1,19 @@
 # Bitcoin price ticker
 
-## Task
+## Dependencies
+* Golang: http://golang.org/
+* GVT vendor: https://github.com/FiloSottile/gvt
 
+## Start
+```
+$ git clone git@github.com:kot13/bpt.git
+$ cd /path/to/project
+$ gvt restore
+$ go build ./bpt.go
+$ ./bpt
+```
+
+## Task
 ----
 Develop a simple bitcoin realtime ticker in *** dev lang that shows in a single text line bitcoin value in Euro based on auto selection between 2 or more bitcoin price feeds and 2 and more currency rates feeds. Selection can be best value for user.
 Feel free to use any feed you like. Completed code we expect to see in GitHub or BitBucket.

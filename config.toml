@@ -1,0 +1,15 @@
+[logger]
+log_level = "info"
+log_file = ""
+
+[[feed]]
+name = "krakenUsd"
+url = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
+parser = "krakenUsd"
+lifetime = 60
+
+[[feed]]
+name = "coinDeskUsd"
+url = "http://api.coindesk.com/v1/bpi/currentprice.json"
+parser = "coinDeskUsd"
+lifetime = 60
