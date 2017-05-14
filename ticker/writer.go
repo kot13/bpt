@@ -10,7 +10,7 @@ type SimpleWriter struct{}
 func (s SimpleWriter) Write(storage Storage) {
 	format := "%s: %6.2f    Active sources: (%d of %d);\t"
 	result := ""
-	for title, pair := range storage {
+	for title, pair := range storage.m {
 		value, active, all := getPairData(pair)
 
 		result += fmt.Sprintf(format, title, value, active, all)

@@ -13,6 +13,11 @@ $ go build ./bpt.go
 $ ./bpt
 ```
 
+## Test
+```
+$ go test ./exchange
+```
+
 ## Task
 ----
 Develop a simple bitcoin realtime ticker in *** dev lang that shows in a single text line bitcoin value in Euro based on auto selection between 2 or more bitcoin price feeds and 2 and more currency rates feeds. Selection can be best value for user.
