@@ -9,8 +9,13 @@ import (
 var cfg Cfg
 
 type Cfg struct {
+	App    AppConfig    `toml:"app"`
 	Logger LoggerConfig `toml:"logger"`
 	Feed   []FeedConfig `toml:"feed"`
+}
+
+type AppConfig struct {
+	Interval int `toml:"interval"`
 }
 
 type LoggerConfig struct {

@@ -1,11 +1,14 @@
 package main
 
 import (
+	log "github.com/Sirupsen/logrus"
+
 	"bpt/config"
 	"bpt/logger"
-
-	log "github.com/Sirupsen/logrus"
 	"bpt/exchange"
+	"bpt/ticker"
+	"bpt/worker"
+	"time"
 )
 
 func main()  {
@@ -18,25 +21,20 @@ func main()  {
 
 	log.Info("Start bpt")
 
-	exchangePoints := []exchange.Point{}
+	stop := make(chan bool)
+	results := make(chan exchange.TradeData)
 	for _, feed := range conf.Feed {
 		point, err := exchange.NewPoint(feed.Name, feed.Url, feed.Parser, feed.Lifetime)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		exchangePoints = append(exchangePoints, point)
+		worker.New(point, stop, results)
 	}
 
-	data, err := exchangePoints[0].Fetch()
-	if err != nil {
-		log.Println(err)
-	}
-	log.Printf("%v", data)
+	ticker.Subscribe(results)
+	ticker.Start(conf.App.Interval)
 
-	data, err = exchangePoints[1].Fetch()
-	if err != nil {
-		log.Println(err)
-	}
-	log.Printf("%v", data)
+	//TODO: Daemonize
+	time.Sleep(time.Duration(10) * time.Minute)
 }

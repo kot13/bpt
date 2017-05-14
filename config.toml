@@ -1,3 +1,6 @@
+[app]
+interval = 10
+
 [logger]
 log_level = "info"
 log_file = ""
@@ -6,10 +9,10 @@ log_file = ""
 name = "krakenUsd"
 url = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
 parser = "krakenUsd"
-lifetime = 60
+lifetime = 10
 
 [[feed]]
 name = "coinDeskUsd"
 url = "http://api.coindesk.com/v1/bpi/currentprice.json"
 parser = "coinDeskUsd"
-lifetime = 60
+lifetime = 10
