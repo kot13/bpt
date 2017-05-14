@@ -23,6 +23,7 @@ func init() {
 
 func (krakenUsd KrakenUsd) Parse(p Point, raw json.RawMessage) (tD TradeData, err error) {
 	tD.Name = p.Name
+	tD.Pair = p.Pair
 
 	var r KrakenUsdResponse
 	err = json.Unmarshal(raw, &r)

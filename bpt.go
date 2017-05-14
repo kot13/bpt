@@ -24,7 +24,7 @@ func main()  {
 	stop := make(chan bool)
 	results := make(chan exchange.TradeData)
 	for _, feed := range conf.Feed {
-		point, err := exchange.NewPoint(feed.Name, feed.Url, feed.Parser, feed.Lifetime)
+		point, err := exchange.NewPoint(feed.Name, feed.Pair, feed.Url, feed.Parser, feed.Lifetime)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -33,7 +33,7 @@ func main()  {
 	}
 
 	ticker.Subscribe(results)
-	ticker.Start(conf.App.Interval)
+	ticker.Start(conf.App.Interval, ticker.SimpleWriter{})
 
 	//TODO: Daemonize
 	time.Sleep(time.Duration(10) * time.Minute)

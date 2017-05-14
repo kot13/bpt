@@ -7,12 +7,14 @@ log_file = ""
 
 [[feed]]
 name = "krakenUsd"
+pair = "BTC/USD"
 url = "https://api.kraken.com/0/public/Ticker?pair=XBTUSD"
 parser = "krakenUsd"
 lifetime = 10
 
 [[feed]]
 name = "coinDeskUsd"
+pair = "BTC/USD"
 url = "http://api.coindesk.com/v1/bpi/currentprice.json"
 parser = "coinDeskUsd"
 lifetime = 10

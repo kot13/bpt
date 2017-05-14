@@ -3,6 +3,7 @@ package worker
 import (
 	"time"
 	"bpt/exchange"
+	log "github.com/Sirupsen/logrus"
 )
 
 func New(p exchange.Point, stop chan bool, results chan<- exchange.TradeData) {
@@ -16,10 +17,10 @@ func New(p exchange.Point, stop chan bool, results chan<- exchange.TradeData) {
 			case <-t.C:
 				data, err := p.Fetch()
 				if err != nil {
-					//TODO: error handle
+					log.Info(err.Error())
+				} else {
+					results <- data
 				}
-
-				results <- data
 			}
 		}
 	}()

@@ -25,6 +25,7 @@ type LoggerConfig struct {
 
 type FeedConfig struct {
 	Name string   `toml:"name"`
+	Pair string   `toml:"pair"`
 	Url  string   `toml:"url"`
 	Parser string `toml:"parser"`
 	Lifetime int  `toml:"lifetime"`

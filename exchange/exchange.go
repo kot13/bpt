@@ -7,6 +7,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"time"
+	"net"
 )
 
 type Parser interface {
@@ -16,6 +17,7 @@ type Parser interface {
 type Point struct {
 	HttpClient *http.Client
 	Name      string
+	Pair	  string
 	Url       string
 	Parser    Parser
 	Lifetime  time.Duration
@@ -23,6 +25,7 @@ type Point struct {
 
 type TradeData struct {
 	Name      string
+	Pair	  string
 	Price     float64
 	Time      time.Time
 	ExpiredAt time.Time
@@ -31,11 +34,17 @@ type TradeData struct {
 var (
 	client *http.Client
 	registeredParsers = map[string]Parser{}
+	timeout = time.Duration(10 * time.Second)
 )
+
+func dialTimeout(network, addr string) (net.Conn, error) {
+	return net.DialTimeout(network, addr, timeout)
+}
 
 func init() {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		Dial: dialTimeout,
 	}
 
 	client = &http.Client{Transport: tr}
@@ -45,7 +54,7 @@ func RegisterParser(name string, p Parser) {
 	registeredParsers[name] = p
 }
 
-func NewPoint(name string, url string, parserName string, lifetime int) (p Point, err error) {
+func NewPoint(name string, pair string, url string, parserName string, lifetime int) (p Point, err error) {
 	parser, ok := registeredParsers[parserName]
 	if !ok {
 		err = fmt.Errorf("Not found parser with name: %s", parserName)
@@ -55,6 +64,7 @@ func NewPoint(name string, url string, parserName string, lifetime int) (p Point
 	p = Point{
 		HttpClient: client,
 		Name: name,
+		Pair: pair,
 		Url:  url,
 		Parser: parser,
 		Lifetime: time.Duration(lifetime),

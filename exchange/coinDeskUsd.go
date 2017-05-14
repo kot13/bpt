@@ -21,6 +21,7 @@ func init() {
 
 func (coinDeskUsd CoinDeskUsd) Parse(p Point, raw json.RawMessage) (tD TradeData, err error) {
 	tD.Name = p.Name
+	tD.Pair = p.Pair
 
 	var r CoinDeskUsdResponse
 	err = json.Unmarshal(raw, &r)
