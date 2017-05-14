@@ -24,18 +24,16 @@ func Subscribe(results <-chan exchange.TradeData) {
 		for {
 			select {
 			case result := <-results:
-				go func() {
-					rate, ok := s[result.Pair]
-					if !ok {
-						rate = make(map[string]Rate)
-						s[result.Pair] = rate
-					}
+				rate, ok := s[result.Pair]
+				if !ok {
+					rate = make(map[string]Rate)
+					s[result.Pair] = rate
+				}
 
-					s[result.Pair][result.Name] = Rate{
-						Value: result.Price,
-						ExpiredAt: result.ExpiredAt,
-					}
-				}()
+				s[result.Pair][result.Name] = Rate{
+					Value: result.Price,
+					ExpiredAt: result.ExpiredAt,
+				}
 			}
 		}
 	}()

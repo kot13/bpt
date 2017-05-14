@@ -8,7 +8,15 @@ import (
 
 func New(p exchange.Point, stop chan bool, results chan<- exchange.TradeData) {
 	t := time.NewTicker(time.Second * p.Lifetime)
+
 	go func() {
+		data, err := p.Fetch()
+		if err != nil {
+			log.Info(err.Error())
+		} else {
+			results <- data
+		}
+
 		for {
 			select {
 			case <-stop:

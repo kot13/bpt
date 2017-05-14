@@ -18,3 +18,24 @@ pair = "BTC/USD"
 url = "http://api.coindesk.com/v1/bpi/currentprice.json"
 parser = "coinDeskUsd"
 lifetime = 10
+
+[[feed]]
+name = "krakenEur"
+pair = "BTC/EUR"
+url = "https://api.kraken.com/0/public/Ticker?pair=XBTEUR"
+parser = "krakenEur"
+lifetime = 10
+
+[[feed]]
+name = "coinDeskEur"
+pair = "BTC/EUR"
+url = "http://api.coindesk.com/v1/bpi/currentprice.json"
+parser = "coinDeskEur"
+lifetime = 10
+
+[[feed]]
+name = "fixerUsd"
+pair = "EUR/USD"
+url = "http://api.fixer.io/latest"
+parser = "fixerUsd"
+lifetime = 100
