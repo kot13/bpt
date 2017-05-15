@@ -12,7 +12,7 @@ func New(p exchange.Point, stop chan bool, results chan<- exchange.TradeData) {
 	go func() {
 		data, err := p.Fetch()
 		if err != nil {
-			log.Info(err.Error())
+			log.Warn(err.Error())
 		} else {
 			results <- data
 		}
@@ -25,7 +25,7 @@ func New(p exchange.Point, stop chan bool, results chan<- exchange.TradeData) {
 			case <-t.C:
 				data, err := p.Fetch()
 				if err != nil {
-					log.Info(err.Error())
+					log.Warn(err.Error())
 				} else {
 					results <- data
 				}

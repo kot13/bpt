@@ -29,6 +29,9 @@ func getPairData(rates map[string]Rate) (value float64, active int, all int) {
 		}
 	}
 
+	if active == 0 {
+		return
+	}
 	value = value / float64(active)
 
 	return
